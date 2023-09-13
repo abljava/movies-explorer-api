@@ -60,15 +60,15 @@ module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
       if (!movie) {
-        throw new NotFoundError('Карточка не найдена');
+        throw new NotFoundError('Фильм не найден');
       }
       if (movie.owner._id.toString() !== req.user._id) {
-        throw new Forbidden('Невозможно удалить карточку другого пользователя');
+        throw new Forbidden('Невозможно удалить данные другого пользователя');
       }
       return Movie.deleteOne(movie)
       // return Card.findByIdAndRemove(req.params.cardId)
         .then(() => {
-          res.send({ message: 'Карточка удалена' });
+          res.send({ message: 'Фильм удален' });
         });
     })
     .catch((err) => {
