@@ -10,15 +10,6 @@ const { NotFoundError } = require('../errors/not-found-err');
 const { NODE_ENV, JWT_SECRET } = process.env;
 const secretKey = 'SECRET_KEY';
 
-module.exports.getUsers = (req, res, next) => {
-  User.find({})
-    // .populate('owner')
-    .then((users) => {
-      res.send(users);
-    })
-    .catch(next);
-};
-
 // добавление пользователя
 module.exports.createUser = (req, res, next) => {
   const {

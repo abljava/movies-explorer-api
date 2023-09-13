@@ -49,6 +49,7 @@ module.exports.postMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
+        // console.log('err', err);
         next(new BadRequest('Некорректные данные'));
       } else {
         next(err);
