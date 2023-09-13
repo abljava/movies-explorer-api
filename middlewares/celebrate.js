@@ -33,6 +33,7 @@ const validateCreateMovie = celebrate({
     description: Joi.string().min(2).max(200).required(),
     nameRU: Joi.string().min(2).max(50).required(),
     nameEN: Joi.string().min(2).max(50).required(),
+    movieId: Joi.number().required(),
     image: Joi.string().required().pattern(
       new RegExp(
         '^(https?:\\/\\/)?'
