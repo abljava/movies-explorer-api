@@ -76,3 +76,22 @@ module.exports.getUserInfo = (req, res, next) => {
       }
     });
 };
+
+// обновляет информацию о пользователе (email и имя)
+module.exports.editUser = (req, res, next) => {
+  User.findByIdAndUpdate(
+    req.user._id,
+    { name: req.body.name, email: req.body.email },
+    { new: 'true', runValidators: true },
+  )
+    .then((user) => {
+      res.send(user);
+    })
+    .catch((err) => {
+      if (err.name === 'ValidationError') {
+        next(new BadRequest('Некорректные данные'));
+      } else {
+        next(err);
+      }
+    });
+};
