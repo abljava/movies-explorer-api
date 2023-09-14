@@ -22,8 +22,8 @@ mongoose.connect(DATA_BASE, {
 });
 
 app.use(express.json());
-app.use(helmet());
 app.use(limiter);
+app.use(helmet());
 app.use(requestLogger); // логгер запросов
 app.use(router);
 app.use(errorLogger); // логгер ошибок

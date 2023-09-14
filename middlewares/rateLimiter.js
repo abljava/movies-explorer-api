@@ -1,8 +1,9 @@
-const { rateLimit } = require('express-rate-limit');
+const rateLimiter = require('express-rate-limit');
 
-module.exports.limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  limit: 100,
-  standardHeaders: 'draft-7',
-  legacyHeaders: false,
+const limiter = rateLimiter({
+  max: 5,
+  windowMS: 10000, // 10 seconds
+  message: "You can't make any more requests at the moment. Try again later",
 });
+
+module.exports = limiter;

@@ -6,11 +6,10 @@ const { Forbidden } = require('../errors/forbidden');
 
 // возвращает все сохранённые текущим пользователем фильмы
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     // .populate('owner')
     .then((movies) => {
-      const userMovies = movies.filter((item) => item.owner._id.toString() === req.user._id);
-      res.send(userMovies);
+      res.send(movies);
     })
     .catch(next);
 };
