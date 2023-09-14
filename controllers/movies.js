@@ -1,20 +1,21 @@
 const httpConstants = require('http2').constants;
 const Movie = require('../models/movie');
 const { BadRequest } = require('../errors/bad-request');
-// const { Conflict } = require('../errors/conflict');
-// const { NotAuthorized } = require('../errors/not-authorized');
 const { NotFoundError } = require('../errors/not-found-err');
 const { Forbidden } = require('../errors/forbidden');
 
+// возвращает все сохранённые текущим пользователем фильмы
 module.exports.getMovies = (req, res, next) => {
   Movie.find({})
     // .populate('owner')
     .then((movies) => {
-      res.send(movies);
+      const userMovies = movies.filter((item) => item.owner._id.toString() === req.user._id);
+      res.send(userMovies);
     })
     .catch(next);
 };
 
+// создаёт фильм
 module.exports.postMovie = (req, res, next) => {
   const {
     country,
@@ -49,7 +50,6 @@ module.exports.postMovie = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        // console.log('err', err);
         next(new BadRequest('Некорректные данные'));
       } else {
         next(err);
@@ -57,20 +57,20 @@ module.exports.postMovie = (req, res, next) => {
     });
 };
 
+// удаляет сохранённый фильм по id
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
+      // console.log(movie);
       if (!movie) {
         throw new NotFoundError('Фильм не найден');
       }
       if (movie.owner._id.toString() !== req.user._id) {
         throw new Forbidden('Невозможно удалить данные другого пользователя');
       }
-      return Movie.deleteOne(movie)
-      // return Card.findByIdAndRemove(req.params.cardId)
-        .then(() => {
-          res.send({ message: 'Фильм удален' });
-        });
+      return Movie.deleteOne(movie).then(() => {
+        res.send({ message: 'Фильм удален' });
+      });
     })
     .catch((err) => {
       if (err.name === 'CastError') {

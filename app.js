@@ -4,12 +4,13 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
+const limiter = require('./middlewares/rateLimiter');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const router = require('./routes/router');
+const router = require('./routes/index');
 
 const { PORT = 3005 } = process.env;
-const { DATA_BASE = 'mongodb://127.0.0.1:27017/filmsdb' } = process.env;
+const { DATA_BASE = 'mongodb://127.0.0.1:27017/bitfilmsdb' } = process.env;
 
 const app = express();
 
@@ -22,6 +23,7 @@ mongoose.connect(DATA_BASE, {
 
 app.use(express.json());
 app.use(helmet());
+app.use(limiter);
 app.use(requestLogger); // логгер запросов
 app.use(router);
 app.use(errorLogger); // логгер ошибок
