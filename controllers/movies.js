@@ -9,6 +9,7 @@ module.exports.getMovies = (req, res, next) => {
   Movie.find({ owner: req.user._id })
     // .populate('owner')
     .then((movies) => {
+      console.log('owner ==>', req.user._id);
       res.send(movies);
     })
     .catch(next);
