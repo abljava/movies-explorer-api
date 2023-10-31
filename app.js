@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
-const limiter = require('./middlewares/rateLimiter');
+// const limiter = require('./middlewares/rateLimiter');
 const { errorHandler } = require('./middlewares/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/index');
@@ -22,7 +22,7 @@ mongoose.connect(DATA_BASE, {
 });
 
 app.use(express.json());
-app.use(limiter);
+// app.use(limiter);
 app.use(helmet());
 app.use(requestLogger); // логгер запросов
 app.use(router);

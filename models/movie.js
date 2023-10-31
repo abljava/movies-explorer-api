@@ -6,13 +6,11 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      maxlength: [30, 'Максимум 30 символов'],
     },
     director: {
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      maxlength: [50, 'Максимум 50 символов'],
     },
     duration: {
       type: Number,
@@ -26,7 +24,7 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      maxlength: [200, 'Максимум 200 символов'],
+      // maxlength: [1000, 'Максимум 1000 символов'],
     },
     image: {
       type: String,
@@ -98,13 +96,11 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      maxlength: [50, 'Максимум 50 символов'],
     },
     nameEN: {
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      maxlength: [50, 'Максимум 50 символов'],
     },
   },
   { versionKey: false },

@@ -31,7 +31,7 @@ module.exports.createUser = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequest('Некорректные данные'));
       } else if (err.code === 11000) {
-        next(new Conflict('Такой email уже зарегистрирован'));
+        next(new Conflict('Пользователь с таким email уже существует'));
       } else {
         next(err);
       }
@@ -46,7 +46,7 @@ module.exports.login = (req, res, next) => {
     .select('+password')
     .then((user) => {
       if (!user || !bcrypt.compareSync(password, user.password)) {
-        throw new NotAuthorized('Неправильные почта или пароль');
+        throw new NotAuthorized('Вы ввели неправильный логин или пароль');
       }
       const token = jwt.sign(
         { _id: user._id },

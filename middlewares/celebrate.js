@@ -26,13 +26,13 @@ const validateEditUser = celebrate({
 
 const validateCreateMovie = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(2).max(30).required(),
-    director: Joi.string().min(2).max(50).required(),
+    country: Joi.string().min(2).required(),
+    director: Joi.string().min(2).required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().min(2).max(200).required(),
-    nameRU: Joi.string().min(2).max(50).required(),
-    nameEN: Joi.string().min(2).max(50).required(),
+    description: Joi.string().min(2).required(),
+    nameRU: Joi.string().min(2).required(),
+    nameEN: Joi.string().min(2).required(),
     movieId: Joi.number().required(),
     image: Joi.string().required().pattern(
       new RegExp(
