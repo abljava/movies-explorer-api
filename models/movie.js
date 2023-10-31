@@ -6,11 +6,13 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
+      maxlength: [500, 'Максимум 500 символов'],
     },
     director: {
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
+      maxlength: [500, 'Максимум 500 символов'],
     },
     duration: {
       type: Number,
@@ -24,7 +26,7 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
-      // maxlength: [1000, 'Максимум 1000 символов'],
+      maxlength: [5000, 'Максимум 5000 символов'],
     },
     image: {
       type: String,
@@ -33,11 +35,11 @@ const movieSchema = new mongoose.Schema(
         validator(url) {
           const urlPattern = new RegExp(
             '^(https?:\\/\\/)?'
-            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-            + '((\\d{1,3}\\.){3}\\d{1,3}))'
-            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-            + '(\\?[;&a-z\\d%_.~+=-]*)?'
-            + '(\\#[-a-z\\d_]*)?$',
+              + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+              + '((\\d{1,3}\\.){3}\\d{1,3}))'
+              + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+              + '(\\?[;&a-z\\d%_.~+=-]*)?'
+              + '(\\#[-a-z\\d_]*)?$',
             'i',
           );
           return urlPattern.test(url);
@@ -52,11 +54,11 @@ const movieSchema = new mongoose.Schema(
         validator(url) {
           const urlPattern = new RegExp(
             '^(https?:\\/\\/)?'
-            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-            + '((\\d{1,3}\\.){3}\\d{1,3}))'
-            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-            + '(\\?[;&a-z\\d%_.~+=-]*)?'
-            + '(\\#[-a-z\\d_]*)?$',
+              + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+              + '((\\d{1,3}\\.){3}\\d{1,3}))'
+              + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+              + '(\\?[;&a-z\\d%_.~+=-]*)?'
+              + '(\\#[-a-z\\d_]*)?$',
             'i',
           );
           return urlPattern.test(url);
@@ -71,11 +73,11 @@ const movieSchema = new mongoose.Schema(
         validator(url) {
           const urlPattern = new RegExp(
             '^(https?:\\/\\/)?'
-            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-            + '((\\d{1,3}\\.){3}\\d{1,3}))'
-            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-            + '(\\?[;&a-z\\d%_.~+=-]*)?'
-            + '(\\#[-a-z\\d_]*)?$',
+              + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+              + '((\\d{1,3}\\.){3}\\d{1,3}))'
+              + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+              + '(\\?[;&a-z\\d%_.~+=-]*)?'
+              + '(\\#[-a-z\\d_]*)?$',
             'i',
           );
           return urlPattern.test(url);
@@ -96,11 +98,13 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
+      maxlength: [1000, 'Максимум 1000 символов'],
     },
     nameEN: {
       type: String,
       required: [true, 'Обязательнрое поле'],
       minlength: [2, 'Минимум 2 символа'],
+      maxlength: [1000, 'Максимум 1000 символов'],
     },
   },
   { versionKey: false },

@@ -26,48 +26,53 @@ const validateEditUser = celebrate({
 
 const validateCreateMovie = celebrate({
   body: Joi.object().keys({
-    country: Joi.string().min(2).required(),
-    director: Joi.string().min(2).required(),
+    country: Joi.string().min(2).max(500).required(),
+    director: Joi.string().min(2).max(500).required(),
     duration: Joi.number().required(),
     year: Joi.string().required(),
-    description: Joi.string().min(2).required(),
-    nameRU: Joi.string().min(2).required(),
-    nameEN: Joi.string().min(2).required(),
+    description: Joi.string().min(2).max(5000).required(),
+    nameRU: Joi.string().min(2).max(1000).required(),
+    nameEN: Joi.string().min(2).max(1000).required(),
     movieId: Joi.number().required(),
-    image: Joi.string().required().pattern(
-      new RegExp(
-        '^(https?:\\/\\/)?'
-          + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-          + '((\\d{1,3}\\.){3}\\d{1,3}))'
-          + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-          + '(\\?[;&a-z\\d%_.~+=-]*)?'
-          + '(\\#[-a-z\\d_]*)?$',
-        'i',
+    image: Joi.string()
+      .required()
+      .pattern(
+        new RegExp(
+          '^(https?:\\/\\/)?'
+            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+            + '((\\d{1,3}\\.){3}\\d{1,3}))'
+            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+            + '(\\?[;&a-z\\d%_.~+=-]*)?'
+            + '(\\#[-a-z\\d_]*)?$',
+          'i',
+        ),
       ),
-    ),
-    trailerLink: Joi.string().required().pattern(
-      new RegExp(
-        '^(https?:\\/\\/)?'
-          + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-          + '((\\d{1,3}\\.){3}\\d{1,3}))'
-          + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-          + '(\\?[;&a-z\\d%_.~+=-]*)?'
-          + '(\\#[-a-z\\d_]*)?$',
-        'i',
+    trailerLink: Joi.string()
+      .required()
+      .pattern(
+        new RegExp(
+          '^(https?:\\/\\/)?'
+            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+            + '((\\d{1,3}\\.){3}\\d{1,3}))'
+            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+            + '(\\?[;&a-z\\d%_.~+=-]*)?'
+            + '(\\#[-a-z\\d_]*)?$',
+          'i',
+        ),
       ),
-    ),
-    thumbnail: Joi.string().required().pattern(
-      new RegExp(
-        '^(https?:\\/\\/)?'
-          + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
-          + '((\\d{1,3}\\.){3}\\d{1,3}))'
-          + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
-          + '(\\?[;&a-z\\d%_.~+=-]*)?'
-          + '(\\#[-a-z\\d_]*)?$',
-        'i',
+    thumbnail: Joi.string()
+      .required()
+      .pattern(
+        new RegExp(
+          '^(https?:\\/\\/)?'
+            + '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'
+            + '((\\d{1,3}\\.){3}\\d{1,3}))'
+            + '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'
+            + '(\\?[;&a-z\\d%_.~+=-]*)?'
+            + '(\\#[-a-z\\d_]*)?$',
+          'i',
+        ),
       ),
-    ),
-
   }),
 });
 
