@@ -12,9 +12,7 @@ const secretKey = 'SECRET_KEY';
 
 // добавление пользователя
 module.exports.createUser = (req, res, next) => {
-  const {
-    email, password, name,
-  } = req.body;
+  const { email, password, name } = req.body;
   bcrypt
     .hash(password, 10)
     .then((hash) => User.create({
@@ -70,7 +68,7 @@ module.exports.getUserInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'DocumentNotFoundError') {
-        next(new NotFoundError('Пользователь с таким id не найден'));
+        next(new NotFoundError());
       } else {
         next(err);
       }
@@ -89,7 +87,9 @@ module.exports.editUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequest('Некорректные данные'));
+        next(new BadRequest());
+      } else if (err.code === 11000) {
+        next(new Conflict());
       } else {
         next(err);
       }
