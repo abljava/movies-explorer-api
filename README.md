@@ -20,7 +20,7 @@
 
 `git clone` - клонировать репозиторий  
 `npm i` - установить зависимости  
-`mongod` - запускает mongodDB
+`mongod` - запустить mongodDB  
 `npm run start` - запустить сервер  
 `npm run dev` - запустить сервер с hot-reload 
 
